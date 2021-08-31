@@ -271,26 +271,58 @@
 </div>
 <div class="article-content">
     <div id="article" class="content">
-        <h1 id="信号接收与解码-Communication-System-Modeling-and-Simulation"><a href="#信号接收与解码-Communication-System-Modeling-and-Simulation" class="headerlink" title="信号接收与解码 Communication System Modeling and Simulation"></a>信号接收与解码 Communication System Modeling and Simulation</h1>
- <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
- <iframe src="//player.bilibili.com/player.html?aid=462422044&bvid=BV19L411t7g3&cid=392408905&page=1"  scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" ></iframe></div>
+        <h1 id="信号接收与解码-Communication-System-Modeling-and-Simulation"><a href="#信号接收与解码-Communication-System-Modeling-and-Simulation" class="headerlink" title="信号接收与解码 Communication System Modeling and Simulation"></a>信号接收与解码 Communication System Modeling and Simulation</h1><h2 id="介绍-Introduction"><a href="#介绍-Introduction" class="headerlink" title="介绍 Introduction"></a>介绍 Introduction</h2><p>&emsp;&emsp;这次做一个信号接收，解调以及解码的实验分享。我们用到的仪器有RTL-SDR，用于接收信号，我们使用Simulink进行仿真模块搭建。</p>
+<p>&emsp;&emsp;This time I will share an experiment on signal reception, demodulation and decoding. This time I will share an experiment on signal reception, demodulation and decoding. The instrument we use is RTL-SDR, which is used to receive signals, and we use Simulink to build the simulation modules.</p>
+<h3 id="RTL-SDR"><a href="#RTL-SDR" class="headerlink" title="RTL-SDR"></a>RTL-SDR</h3><p>&emsp;&emsp;软件定义的无线电(Software Defined Radio，SDR) 是一种无线电广播通信技术，它基于软件定义的无线通信协议而非通过硬连线实现。</p>
+<p>&emsp;&emsp;RTL-SDR是一种廉价的软件无线电的 硬件设备，我使用的款式如下图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 67%;" />
+
+<p>注意：需要配置zadig (<a target="_blank" rel="noopener" href="https://zadig.akeo.ie/">https://zadig.akeo.ie/</a>)</p>
+<h3 id="Simulink"><a href="#Simulink" class="headerlink" title="Simulink"></a>Simulink</h3><p>&emsp;&emsp;Simulink是美国Mathworks公司推出的MATLAB中的一种可视化仿真工具。Simulink是一个模块图环境，用于多域仿真以及基于模型的设计。它支持系统设计、仿真、自动代码生成以及嵌入式系统的连续测试和验证。Simulink提供图形编辑器、可自定义的模块库以及求解器，能够进行动态系统建模和仿真。</p>
+<p>&emsp;&emsp;Simulink具有适应面广、结构和流程清晰及仿真精细、贴近实际、效率高、灵活等优点，并基于以上优点Simulink已被广泛应用于控制理论和数字信号处理的复杂仿真和设计。同时有大量的第三方软件和硬件可应用于或被要求应用于Simulink。</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R3.png" style="zoom:50%;" />
+
+<h2 id="信号捕捉-Capture"><a href="#信号捕捉-Capture" class="headerlink" title="信号捕捉 Capture"></a>信号捕捉 Capture</h2><p>&emsp;&emsp;使用SDRsharp 软件，在老师给定的频率范围：90M-120MHz 之内进行滑动搜索，找到符合升余弦滤波梯形频谱的大致波形，锁定中心频率范围在94.5MHz-95.5MHz之间，之后调节参数，将框图锁定在这个范围，找到中心频点为95MHz。</p>
+<p>&emsp;&emsp;First, we use RTL-SDR to receive the signal. Then We use the SDRsharp software to find the approximate waveform that conforms to the raised cosine filter trapezoidal spectrum, and the center frequency is found to be 95MHz.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R.png"></p>
+<p><strong>①带宽Bandwidth</strong> </p>
+<p>通过频谱图，B=f2-f1=95.2MHz-94.8MHz=0.4MHz=400kHz</p>
+<p>估计信号带宽大致为400kHz 。 </p>
+<p> <strong>②等效矩形带宽 Equivalent rectangular bandwidth</strong></p>
+<p>已知升余弦滤波滚降系数α为 0.5</p>
+<p>W1=B/(1+α)=400/1.5=266.67kHz≈250kHz</p>
+<p><strong>③符号速率 Symbol Rate</strong></p>
+<p>通过Rs=B/(1+α)，α=0.5可以推算出</p>
+<p>Rs=400/1.5=266.67kBaud≈250kBaud</p>
+<h2 id="参数设置-Parameters"><a href="#参数设置-Parameters" class="headerlink" title="参数设置 Parameters"></a>参数设置 Parameters</h2><p><strong>①频率纠正参数：</strong></p>
+<p>通过之前的测试测出自己的RTL频偏为74左右，所以将改为Frequency correction(ppm)改为74。</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R11.png" style="zoom:80%;" />
+
+
+
+<p><strong>②信号接收频点：</strong> </p>
+<p>根据频谱图得出具体频点在95MHz，所以设置信号接收频点为95e6MHz。 </p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R12.png" style="zoom:80%;" />
+
  
 
-<h2 id="背景-Background"><a href="#背景-Background" class="headerlink" title="背景 Background"></a>背景 Background</h2><p>&emsp;&emsp;2019新型冠状病毒（2019-nCoV），2020年1月12日被世界卫生组织命名。冠状病毒是一个大型病毒家族，已知可引起感冒以及中东呼吸综合征（MERS）和严重急性呼吸综合征（SARS）等较严重疾病。整体来看，全球疫情蔓延,人们的防疫卫生意识仍需提高。</p>
-<p>&emsp;&emsp;为了提高人们的防疫意识，抗疫战士小游戏应运而生！这款游戏的主角是反派角色拟人化的病毒和医生/学生，游戏元素则包括了抗疫过程中常见的口罩、消毒水等。更在游戏过程中渗透了防疫知识，提高了玩家们的安全意识。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c.png"></p>
-<h2 id="游戏设计-Game-Design"><a href="#游戏设计-Game-Design" class="headerlink" title="游戏设计 Game Design"></a>游戏设计 Game Design</h2><h3 id="系统运行环境"><a href="#系统运行环境" class="headerlink" title="系统运行环境"></a>系统运行环境</h3><p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c1.png"></p>
-<h3 id="游戏元素"><a href="#游戏元素" class="headerlink" title="游戏元素"></a>游戏元素</h3><p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c2.png"></p>
-<h3 id="游戏规则"><a href="#游戏规则" class="headerlink" title="游戏规则"></a>游戏规则</h3><p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c3.png"></p>
-<h2 id="界面展示-Activities"><a href="#界面展示-Activities" class="headerlink" title="界面展示 Activities"></a>界面展示 Activities</h2><p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c4.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c5.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c6.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c7.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c8.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c9.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c10.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/c11.png"></p>
-<h2 id="部分代码展示-Demonstration-of-Code"><a href="#部分代码展示-Demonstration-of-Code" class="headerlink" title="部分代码展示 Demonstration of Code"></a>部分代码展示 Demonstration of Code</h2><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/fxfmz4"><img src="https://z3.ax1x.com/2021/08/21/fxfmz4.png" alt="fxfmz4.png"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/fxfuQJ"><img src="https://z3.ax1x.com/2021/08/21/fxfuQJ.png" alt="fxfuQJ.png"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/fxfeWF"><img src="https://z3.ax1x.com/2021/08/21/fxfeWF.png" alt="fxfeWF.png"></a></p>
+<p><strong>③期待接收字样：</strong> </p>
+<p>因为有14个字符，所以把‘hello world’修改为‘abcdefghijklmn’，解调出信息后，将其更改为‘Credit Default’。</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R13.png" style="zoom: 67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R14.png" style="zoom: 67%;" />
+
+<p><strong>③符号速率：</strong></p>
+<p>  由上面几问已知符号速率为250kHz,所以将符号速率都改为250kHz。</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R15.png" style="zoom:80%;" />
+
+ 
+
+
+
+<h2 id="仿真模块介绍-Modules"><a href="#仿真模块介绍-Modules" class="headerlink" title="仿真模块介绍 Modules"></a>仿真模块介绍 Modules</h2><p>我们先采用 RTL-SDR Receiver 接收信号， 再经过四倍下采样，去直流之后，输入 QPSK 解调模块进行解调。 </p>
+<p>QPSK解调模块中有粗频率同步模块，符号定时同步模块，载波同步模块，前导码检测模块，帧同步模块，解码模块。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/m1.png"></p>
 <h2 id="游戏下载-Download"><a href="#游戏下载-Download" class="headerlink" title="游戏下载 Download"></a>游戏下载 Download</h2><p>游戏本体下载：<a target="_blank" rel="noopener" href="https://github.com/lou1221/FightagainstVirus/blob/master/%E6%8A%97%E7%96%AB%E6%88%98%E5%A3%AB.exe">https://github.com/lou1221/FightagainstVirus/blob/master/%E6%8A%97%E7%96%AB%E6%88%98%E5%A3%AB.exe</a></p>
 <p>源代码下载：</p>
 
