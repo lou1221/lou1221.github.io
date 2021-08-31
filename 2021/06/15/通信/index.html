@@ -275,7 +275,7 @@
 <p>&emsp;&emsp;This time I will share an experiment on signal reception, demodulation and decoding. This time I will share an experiment on signal reception, demodulation and decoding. The instrument we use is RTL-SDR, which is used to receive signals, and we use Simulink to build the simulation modules.</p>
 <h3 id="RTL-SDR"><a href="#RTL-SDR" class="headerlink" title="RTL-SDR"></a>RTL-SDR</h3><p>&emsp;&emsp;软件定义的无线电(Software Defined Radio，SDR) 是一种无线电广播通信技术，它基于软件定义的无线通信协议而非通过硬连线实现。</p>
 <p>&emsp;&emsp;RTL-SDR是一种廉价的软件无线电的 硬件设备，我使用的款式如下图所示：</p>
-<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 67%;" />
 
 <p>注意：需要配置zadig (<a target="_blank" rel="noopener" href="https://zadig.akeo.ie/">https://zadig.akeo.ie/</a>)</p>
 <h3 id="Simulink"><a href="#Simulink" class="headerlink" title="Simulink"></a>Simulink</h3><p>&emsp;&emsp;Simulink是美国Mathworks公司推出的MATLAB中的一种可视化仿真工具。Simulink是一个模块图环境，用于多域仿真以及基于模型的设计。它支持系统设计、仿真、自动代码生成以及嵌入式系统的连续测试和验证。Simulink提供图形编辑器、可自定义的模块库以及求解器，能够进行动态系统建模和仿真。</p>
@@ -336,7 +336,7 @@
 <p>粗载波频偏估计，载波频偏补偿。</p>
 <p><strong>实现逻辑：</strong></p>
 <p>计算信号的 4 次幂，其中 4 次幂的设定是因为 QPSK 的调制阶数为 4。4 次幂后的信号频谱将在频偏的 4 倍位置产生明显峰值。检测信号峰值位置，除以4后得到频偏值。</p>
-<h3 id="符号定时同步模块（Symbol-Synchronizer）"><a href="#符号定时同步模块（Symbol-Synchronizer）" class="headerlink" title="符号定时同步模块（Symbol Synchronizer）"></a>符号定时同步模块（Symbol Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R25.png"  />
+<h3 id="符号定时同步模块（Symbol-Synchronizer）"><a href="#符号定时同步模块（Symbol-Synchronizer）" class="headerlink" title="符号定时同步模块（Symbol Synchronizer）"></a>符号定时同步模块（Symbol Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R25.png" style="zoom: 80%;" />
 
 <p><strong>功能：</strong></p>
 <p>实现符号同步,在最大采样点采样。 </p>
@@ -347,7 +347,7 @@
 <img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R26.png" style="zoom:80%;" />
 
 <p>   可以看出，符号同步后星座图变为圈状。</p>
-<h3 id="载波同步模块（Carrier-Synchronizer）"><a href="#载波同步模块（Carrier-Synchronizer）" class="headerlink" title="载波同步模块（Carrier Synchronizer）"></a>载波同步模块（Carrier Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R27.png" style="zoom: 100%;" />
+<h3 id="载波同步模块（Carrier-Synchronizer）"><a href="#载波同步模块（Carrier-Synchronizer）" class="headerlink" title="载波同步模块（Carrier Synchronizer）"></a>载波同步模块（Carrier Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R27.png" style="zoom: 80%;" />
 
 <p><strong>功能：</strong></p>
 <p>进行了载波的频率和相位的同步。实现细频偏纠正及相位锁定。 </p>
