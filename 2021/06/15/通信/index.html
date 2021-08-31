@@ -10,7 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/image/logo2.ico">
 
 
-<meta name="keywords" content="设计,游戏开发,">
+<meta name="keywords" content="设计,通信,">
 <meta name="description" content="">
 
 
@@ -247,7 +247,7 @@
             
             <li><a href="/tags/设计">设计</a></li>
             
-            <li><a href="/tags/游戏开发">游戏开发</a></li>
+            <li><a href="/tags/通信">通信</a></li>
             
             
         </ul>
@@ -275,16 +275,19 @@
 <p>&emsp;&emsp;This time I will share an experiment on signal reception, demodulation and decoding. This time I will share an experiment on signal reception, demodulation and decoding. The instrument we use is RTL-SDR, which is used to receive signals, and we use Simulink to build the simulation modules.</p>
 <h3 id="RTL-SDR"><a href="#RTL-SDR" class="headerlink" title="RTL-SDR"></a>RTL-SDR</h3><p>&emsp;&emsp;软件定义的无线电(Software Defined Radio，SDR) 是一种无线电广播通信技术，它基于软件定义的无线通信协议而非通过硬连线实现。</p>
 <p>&emsp;&emsp;RTL-SDR是一种廉价的软件无线电的 硬件设备，我使用的款式如下图所示：</p>
-<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 50%;" />
 
 <p>注意：需要配置zadig (<a target="_blank" rel="noopener" href="https://zadig.akeo.ie/">https://zadig.akeo.ie/</a>)</p>
 <h3 id="Simulink"><a href="#Simulink" class="headerlink" title="Simulink"></a>Simulink</h3><p>&emsp;&emsp;Simulink是美国Mathworks公司推出的MATLAB中的一种可视化仿真工具。Simulink是一个模块图环境，用于多域仿真以及基于模型的设计。它支持系统设计、仿真、自动代码生成以及嵌入式系统的连续测试和验证。Simulink提供图形编辑器、可自定义的模块库以及求解器，能够进行动态系统建模和仿真。</p>
 <p>&emsp;&emsp;Simulink具有适应面广、结构和流程清晰及仿真精细、贴近实际、效率高、灵活等优点，并基于以上优点Simulink已被广泛应用于控制理论和数字信号处理的复杂仿真和设计。同时有大量的第三方软件和硬件可应用于或被要求应用于Simulink。</p>
-<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R3.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R3.png" style="zoom: 33%;" />
 
 <h2 id="信号捕捉-Capture"><a href="#信号捕捉-Capture" class="headerlink" title="信号捕捉 Capture"></a>信号捕捉 Capture</h2><p>&emsp;&emsp;使用SDRsharp 软件，在老师给定的频率范围：90M-120MHz 之内进行滑动搜索，找到符合升余弦滤波梯形频谱的大致波形，锁定中心频率范围在94.5MHz-95.5MHz之间，之后调节参数，将框图锁定在这个范围，找到中心频点为95MHz。</p>
 <p>&emsp;&emsp;First, we use RTL-SDR to receive the signal. Then We use the SDRsharp software to find the approximate waveform that conforms to the raised cosine filter trapezoidal spectrum, and the center frequency is found to be 95MHz.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R.png"></p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R.png"  />
+
+
+
 <p><strong>①带宽Bandwidth</strong> </p>
 <p>通过频谱图，B=f2-f1=95.2MHz-94.8MHz=0.4MHz=400kHz</p>
 <p>估计信号带宽大致为400kHz 。 </p>
@@ -320,11 +323,58 @@
 
 
 
-<h2 id="仿真模块介绍-Modules"><a href="#仿真模块介绍-Modules" class="headerlink" title="仿真模块介绍 Modules"></a>仿真模块介绍 Modules</h2><p>我们先采用 RTL-SDR Receiver 接收信号， 再经过四倍下采样，去直流之后，输入 QPSK 解调模块进行解调。 </p>
+<h2 id="仿真模块介绍-Modules"><a href="#仿真模块介绍-Modules" class="headerlink" title="仿真模块介绍 Modules"></a>仿真模块介绍 Modules</h2><h3 id="总体介绍-General-Introduction"><a href="#总体介绍-General-Introduction" class="headerlink" title="总体介绍 General Introduction"></a>总体介绍 General Introduction</h3><p>我们先采用 RTL-SDR Receiver 接收信号， 再经过四倍下采样，去直流之后，输入 QPSK 解调模块进行解调。 </p>
 <p>QPSK解调模块中有粗频率同步模块，符号定时同步模块，载波同步模块，前导码检测模块，帧同步模块，解码模块。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/m1.png"></p>
-<h2 id="游戏下载-Download"><a href="#游戏下载-Download" class="headerlink" title="游戏下载 Download"></a>游戏下载 Download</h2><p>游戏本体下载：<a target="_blank" rel="noopener" href="https://github.com/lou1221/FightagainstVirus/blob/master/%E6%8A%97%E7%96%AB%E6%88%98%E5%A3%AB.exe">https://github.com/lou1221/FightagainstVirus/blob/master/%E6%8A%97%E7%96%AB%E6%88%98%E5%A3%AB.exe</a></p>
-<p>源代码下载：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R22.png"></p>
+<p>经过AGC和升余弦滤波器的<strong>频域图</strong>如图所示：</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R23.png" style="zoom:67%;" />
+
+<h3 id="粗频率同步模块（Coarse-Frequency-Compensation）"><a href="#粗频率同步模块（Coarse-Frequency-Compensation）" class="headerlink" title="粗频率同步模块（Coarse Frequency Compensation）"></a>粗频率同步模块（Coarse Frequency Compensation）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R24.png" style="zoom: 50%;" />
+
+<p><strong>功能：</strong></p>
+<p>粗载波频偏估计，载波频偏补偿。</p>
+<p><strong>实现逻辑：</strong></p>
+<p>计算信号的 4 次幂，其中 4 次幂的设定是因为 QPSK 的调制阶数为 4。4 次幂后的信号频谱将在频偏的 4 倍位置产生明显峰值。检测信号峰值位置，除以4后得到频偏值。</p>
+<h3 id="符号定时同步模块（Symbol-Synchronizer）"><a href="#符号定时同步模块（Symbol-Synchronizer）" class="headerlink" title="符号定时同步模块（Symbol Synchronizer）"></a>符号定时同步模块（Symbol Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R25.png"  />
+
+<p><strong>功能：</strong></p>
+<p>实现符号同步,在最大采样点采样。 </p>
+<p><strong>实现逻辑：</strong></p>
+<p>定时误差检测器测量定时误差，并且产生一个反馈控制信号；环路滤波器用于对反馈控制信号进行滤波；压控时钟 VCC 或数控时钟 NCC 产生采样时钟参考，包括采样率和相位，与接收到的信号定时匹配。</p>
+<p><strong>效果：</strong></p>
+<p>如下图所示分别为符号同步前后的时域：</p>
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R26.png" style="zoom:80%;" />
+
+<p>   可以看出，符号同步后星座图变为圈状。</p>
+<h3 id="载波同步模块（Carrier-Synchronizer）"><a href="#载波同步模块（Carrier-Synchronizer）" class="headerlink" title="载波同步模块（Carrier Synchronizer）"></a>载波同步模块（Carrier Synchronizer）</h3><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R27.png" style="zoom: 100%;" />
+
+<p><strong>功能：</strong></p>
+<p>进行了载波的频率和相位的同步。实现细频偏纠正及相位锁定。 </p>
+<p><strong>实现逻辑：</strong></p>
+<p>实现载波同步有两种常见的方法，直观的方法是使用同步环路产生与接受载波具有相同频率和相位的本地正弦波和余弦波，并将它们与接收信号相乘，   以将 I 路和 Q 路解调到基带。为实现这一点，需要一个反馈环路，它能够导出相位误差的测量结果，从而产生一个信号来驱动具有正交（正弦和余弦）输出的 NCO。另外一种载波同步方法是在基带实现的，使用固定频率的正交振荡器解调并在基带做频率校正，基带的同步环路必须能抵消残留的频率偏差带来的星座图旋转，通过比较采样到的符号于理想星座点来得到相位误差，用于对接收符号进行相位的反旋转，从而实现载波同步。</p>
+<p><strong>效果：</strong></p>
+<p>如下图所示分别为载波同步前后的时域：</p>
+ <img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R28.png" style="zoom: 80%;" />
+
+<p>可以看出进行载波同步后，星座图效果更好，更接近于原始信号的星座图。</p>
+<h3 id="前导码检测模块（Preamble-Detector）和帧同步模块（Frame-Synchronizer）"><a href="#前导码检测模块（Preamble-Detector）和帧同步模块（Frame-Synchronizer）" class="headerlink" title="前导码检测模块（Preamble Detector）和帧同步模块（Frame Synchronizer）"></a>前导码检测模块（Preamble Detector）和帧同步模块（Frame Synchronizer）</h3><p>​                                                             <img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R29.png" style="zoom:67%;" /></p>
+<p><strong>功能：</strong></p>
+<p>实现帧同步。</p>
+<p><strong>实现逻辑：</strong></p>
+<p>前导码检测模块用来检测前导码结尾的位置。检测到已知前导码的相关峰意味着检测到帧头。将检测的结果向后传递给帧同步模块，帧同步模块根据检测到的帧头输出同步过后的帧。其中第二个输出是一个布尔值，用来指示第一个输出是否为有效帧。</p>
+<p><strong>⑤解码模块（Data Decoding）：</strong></p>
+ <img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R30.png"  />
+
+ 
+
+
+
+<p><strong>功能：</strong></p>
+<p>进行帧的解码、解调等，并输出信息字符以及误码率。</p>
+<p><strong>实现逻辑：</strong></p>
+<p>巴克码发生器首先生成巴克码序列，相位偏移估算模块通过输入调制后的巴克码前导序列和帧数据序列，得出二者的相偏，再将相偏输入给相偏矫正与解调模块,在相偏矫正与解调模块中进行相偏的的消除与 QPSK 解调。解调输出后使用线性反馈移位寄存器对数据进行解扰，最后将数据按照 7bit 一组进行 ASCII 码的映射，输出消息字符，并进行误码率计算。</p>
+<h2 id="最终结果-Results"><a href="#最终结果-Results" class="headerlink" title="最终结果 Results"></a>最终结果 Results</h2><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R41.png"  />
 
     </div>
 </div>
