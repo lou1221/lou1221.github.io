@@ -275,12 +275,12 @@
 <p>&emsp;&emsp;This time I will share an experiment on signal reception, demodulation and decoding. This time I will share an experiment on signal reception, demodulation and decoding. The instrument we use is RTL-SDR, which is used to receive signals, and we use Simulink to build the simulation modules.</p>
 <h3 id="RTL-SDR"><a href="#RTL-SDR" class="headerlink" title="RTL-SDR"></a>RTL-SDR</h3><p>&emsp;&emsp;软件定义的无线电(Software Defined Radio，SDR) 是一种无线电广播通信技术，它基于软件定义的无线通信协议而非通过硬连线实现。</p>
 <p>&emsp;&emsp;RTL-SDR是一种廉价的软件无线电的 硬件设备，我使用的款式如下图所示：</p>
-<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R1.png" width="40%" />
 
 <p>注意：需要配置zadig (<a target="_blank" rel="noopener" href="https://zadig.akeo.ie/">https://zadig.akeo.ie/</a>)</p>
 <h3 id="Simulink"><a href="#Simulink" class="headerlink" title="Simulink"></a>Simulink</h3><p>&emsp;&emsp;Simulink是美国Mathworks公司推出的MATLAB中的一种可视化仿真工具。Simulink是一个模块图环境，用于多域仿真以及基于模型的设计。它支持系统设计、仿真、自动代码生成以及嵌入式系统的连续测试和验证。Simulink提供图形编辑器、可自定义的模块库以及求解器，能够进行动态系统建模和仿真。</p>
 <p>&emsp;&emsp;Simulink具有适应面广、结构和流程清晰及仿真精细、贴近实际、效率高、灵活等优点，并基于以上优点Simulink已被广泛应用于控制理论和数字信号处理的复杂仿真和设计。同时有大量的第三方软件和硬件可应用于或被要求应用于Simulink。</p>
-<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R3.png" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R3.png" width="30%" />
 
 <h2 id="信号捕捉-Capture"><a href="#信号捕捉-Capture" class="headerlink" title="信号捕捉 Capture"></a>信号捕捉 Capture</h2><p>&emsp;&emsp;使用SDRsharp 软件，在老师给定的频率范围：90M-120MHz 之内进行滑动搜索，找到符合升余弦滤波梯形频谱的大致波形，锁定中心频率范围在94.5MHz-95.5MHz之间，之后调节参数，将框图锁定在这个范围，找到中心频点为95MHz。</p>
 <p>&emsp;&emsp;First, we use RTL-SDR to receive the signal. Then We use the SDRsharp software to find the approximate waveform that conforms to the raised cosine filter trapezoidal spectrum, and the center frequency is found to be 95MHz.</p>
@@ -374,7 +374,7 @@
 <p>进行帧的解码、解调等，并输出信息字符以及误码率。</p>
 <p><strong>实现逻辑：</strong></p>
 <p>巴克码发生器首先生成巴克码序列，相位偏移估算模块通过输入调制后的巴克码前导序列和帧数据序列，得出二者的相偏，再将相偏输入给相偏矫正与解调模块,在相偏矫正与解调模块中进行相偏的的消除与 QPSK 解调。解调输出后使用线性反馈移位寄存器对数据进行解扰，最后将数据按照 7bit 一组进行 ASCII 码的映射，输出消息字符，并进行误码率计算。</p>
-<h2 id="最终结果-Results"><a href="#最终结果-Results" class="headerlink" title="最终结果 Results"></a>最终结果 Results</h2><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R41.png" style="zoom:50%;" />
+<h2 id="最终结果-Results"><a href="#最终结果-Results" class="headerlink" title="最终结果 Results"></a>最终结果 Results</h2><img src="https://cdn.jsdelivr.net/gh/lou1221/image@main/R41.png" width="25%" />
 
     </div>
 </div>
